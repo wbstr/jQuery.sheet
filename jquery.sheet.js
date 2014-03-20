@@ -7202,7 +7202,7 @@ jQuery = jQuery || window.jQuery;
                     sheetTab:function (get, callback) {
                         var sheetTab = '';
                         if (get) {
-                            sheetTab = jS.obj.table().attr('title') || jS.msg.sheetTitleDefault.replace(/[{]index[}]/gi, jS.i + 1);
+                            sheetTab = jS.obj.table().attr('data-sheettitle') || jS.obj.table().attr('title') || jS.msg.sheetTitleDefault.replace(/[{]index[}]/gi, jS.i + 1);
                             if (callback) {
                                 callback(sheetTab);
                             }
