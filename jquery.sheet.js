@@ -8518,7 +8518,7 @@ jQuery = jQuery || window.jQuery;
             }
 
             if (!s.barMenus) {
-                jS.controlFactory.barMenuTop = jS.controlFactory.barMenuLeft = emptyFN;
+                jS.controlFactory.barMenu.top = jS.controlFactory.barMenu.left = emptyFN;
             }
 
             if (!s.freezableCells) {
