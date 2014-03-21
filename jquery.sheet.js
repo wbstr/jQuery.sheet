@@ -3299,7 +3299,7 @@ jQuery = jQuery || window.jQuery;
                                         if (jS.isSheetEditable()) {
                                             jS.controlFactory.barHandleFreeze[entity](pane);
 
-                                            if (jS.isBarMenus() && entity == "top") {
+                                            if (entity == "top") {
                                                 jS.controlFactory.barMenu[entity](e, i, bar);
                                             }
                                         }
@@ -8449,10 +8449,6 @@ jQuery = jQuery || window.jQuery;
 
                     isHideFormula: function(){
                         return s.hideFormula;
-                    },
-
-                    isBarMenus: function(){
-                        return s.barMenus;
                     },
 
                     isResizableCells: function(){
