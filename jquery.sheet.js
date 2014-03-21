@@ -645,7 +645,8 @@ jQuery = jQuery || window.jQuery;
                         barSelect: true,
                         hideFormula:false,
                         addSpreadsheet:true,
-                        useUneditableCells:true
+                        useUneditableCells:true,
+                        tdMenu:true
                     };
 
                 //destroy already existing spreadsheet
@@ -8519,6 +8520,10 @@ jQuery = jQuery || window.jQuery;
 
             if (!s.barMenus) {
                 jS.controlFactory.barMenu.top = jS.controlFactory.barMenu.left = emptyFN;
+            }
+
+            if(!s.tdMenu){
+                jS.controlFactory.tdMenu = emptyFN;
             }
 
             if (!s.freezableCells) {
