@@ -624,6 +624,9 @@ jQuery = jQuery || window.jQuery;
                                 }
 
                                 return value;
+                            },
+                            html: function(value) {
+                                return this.td.html()
                             }
                         },
                         alert: function(msg) {
