@@ -11300,7 +11300,7 @@ jQuery = jQuery || window.jQuery;
 
     $.print = function (s) {
         var w = win.open();
-        w.doc.write("<html><body><xmp>" + s + "\n</xmp></body></html>");
+        w.doc.write("<html><body><textarea>" + s + "\n</textarea></body></html>");
         w.doc.close();
     };
 
