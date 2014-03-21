@@ -643,7 +643,8 @@ jQuery = jQuery || window.jQuery;
                             }
                         },
                         barSelect: true,
-                        hideFormula:false
+                        hideFormula:false,
+                        addSpreadsheet:true
                     };
 
                 //destroy already existing spreadsheet
@@ -2838,7 +2839,7 @@ jQuery = jQuery || window.jQuery;
 
                         sheetAdder: function () {
                             var addSheet = doc.createElement('span');
-                            if (jS.isSheetEditable()) {
+                            if (jS.isSheetEditable() && jS.isAddSpreadsheet()) {
                                 addSheet.setAttribute('class', jS.cl.sheetAdder + ' ' + jS.cl.tab + ' ' + jS.cl.uiTab + ' ui-corner-bottom');
                                 addSheet.setAttribute('title', jS.msg.addSheet);
                                 addSheet.innerHTML = '&nbsp;+&nbsp;';
@@ -8431,6 +8432,10 @@ jQuery = jQuery || window.jQuery;
 
                     isResizableCells: function(){
                         return s.resizableCells;
+                    },
+
+                    isAddSpreadsheet: function(){
+                        return s.addSpreadsheet;
                     }
                 };
             jS.setBusy(true);
