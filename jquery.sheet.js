@@ -3875,8 +3875,10 @@ jQuery = jQuery || window.jQuery;
                                     //noinspection FallthroughInSwitchStatementJS
                                     switch (e.keyCode) {
                                         case key.DELETE:
-                                            jS.toTsv(null, true);
-                                            jS.obj.formula().val('');
+                                            if(!(jS.isUseUneditableCells && td[0].jSCell.uneditable)){
+                                                jS.toTsv(null, true);
+                                                jS.obj.formula().val('');
+                                            }
                                             break;
                                         case key.TAB:
                                             jS.evt.doc.tab(e);
