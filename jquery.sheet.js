@@ -3398,8 +3398,14 @@ jQuery = jQuery || window.jQuery;
                             }
 
                             if (!td.length) return;
-                            if(jS.isUseUneditableCells && td[0].jSCell.uneditable){
-                                return;
+
+                            if(jS.isUseUneditableCells){
+                                var highlighted = jS.highlighted(true);
+                                for(var i = 0;i<highlighted.length;i++){
+                                    if (highlighted[i].uneditable){
+                                        return;
+                                    }
+                                }
                             }
 
                             (jS.obj.inPlaceEdit().destroy || emptyFN)();
@@ -3971,6 +3977,14 @@ jQuery = jQuery || window.jQuery;
                         pasteOverCells:function (e) {
                             e = e || win.event;
                             if (e.ctrlKey || e.type == "paste") {
+                                var highlighted = jS.highlighted(true);
+                                if(jS.isUseUneditableCells()){
+                                    for(var i = 0;i<highlighted.length;i++){
+                                        if (highlighted[i].uneditable){
+                                            return false;
+                                        }
+                                    }
+                                }
                                 var fnAfter = function () {
                                     jS.updateCellsAfterPasteToFormula();
                                 };
