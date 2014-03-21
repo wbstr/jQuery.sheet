@@ -644,7 +644,8 @@ jQuery = jQuery || window.jQuery;
                         },
                         barSelect: true,
                         hideFormula:false,
-                        addSpreadsheet:true
+                        addSpreadsheet:true,
+                        useUneditableCells:true
                     };
 
                 //destroy already existing spreadsheet
@@ -3397,6 +3398,9 @@ jQuery = jQuery || window.jQuery;
                             }
 
                             if (!td.length) return;
+                            if(jS.isUseUneditableCells && td[0].jSCell.uneditable){
+                                return;
+                            }
 
                             (jS.obj.inPlaceEdit().destroy || emptyFN)();
 
@@ -4293,7 +4297,6 @@ jQuery = jQuery || window.jQuery;
                             if (jS.isBusy()) {
                                 return false;
                             }
-
                             jS.controlFactory.inPlaceEdit();
 
                             return true;
@@ -5989,7 +5992,7 @@ jQuery = jQuery || window.jQuery;
                             v;
 
                         if (!cell) return;
-                        if (cell.uneditable) return;
+                        //if (cell.uneditable) return;
 
                         jS.trigger('sheetCellEdit', [cell]);
 
@@ -8436,6 +8439,10 @@ jQuery = jQuery || window.jQuery;
 
                     isAddSpreadsheet: function(){
                         return s.addSpreadsheet;
+                    },
+
+                    isUseUneditableCells: function(){
+                        return s.useUneditableCells;
                     }
                 };
             jS.setBusy(true);
