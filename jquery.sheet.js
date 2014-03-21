@@ -3902,7 +3902,12 @@ jQuery = jQuery || window.jQuery;
                                             break;
                                         case key.V:
                                             if (e.ctrlKey) {
-                                                return jS.evt.formula.If(!jS.evt.pasteOverCells(e), e);
+                                                if(jS.isHideFormula()){
+                                                    td.trigger('cellEdit');
+                                                    return true;
+                                                } else {
+                                                    return jS.evt.formula.If(!jS.evt.pasteOverCells(e), e);
+                                                }
                                             } else {
                                                 td.trigger('cellEdit');
                                                 return true;
