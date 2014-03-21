@@ -642,7 +642,8 @@ jQuery = jQuery || window.jQuery;
                                 callbackIfFalse();
                             }
                         },
-                        barSelect: true
+                        barSelect: true,
+                        hideFormula:false
                     };
 
                 //destroy already existing spreadsheet
@@ -2789,8 +2790,9 @@ jQuery = jQuery || window.jQuery;
                                 secondRowTr = doc.createElement('tr');
                                 secondRow.appendChild(secondRowTr);
 
-                                header.appendChild(secondRow);
-
+                                if(!jS.isHideFormula()){
+                                    header.appendChild(secondRow);
+                                }
 
                                 formulaParent = doc.createElement('td');
                                 formulaParent.className = jS.cl.formulaParent;
@@ -8416,6 +8418,10 @@ jQuery = jQuery || window.jQuery;
 
                     isBarSelect: function() {
                         return s.barSelect;
+                    },
+
+                    isHideFormula: function(){
+                        return s.hideFormula;
                     }
                 };
             jS.setBusy(true);
