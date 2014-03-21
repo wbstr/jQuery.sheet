@@ -42,6 +42,7 @@
 	height: 0px ! important;
 	float: right;
 	margin-right: 30px;
+	cursor: pointer ! important;
 }
 .jSParent .jSBarTopMenuButton * {
 	position: absolute;
@@ -239,6 +240,11 @@
 	border-width: 0px 0px 1px 1px;
 }
 
+.jSParent .jSBarTopSelectable
+{
+	cursor: pointer ! important;
+}
+
 .jSParent .jSCellHighighted {
 	background-image: none ! important;
 }
@@ -251,7 +257,7 @@
 }
 
 /* Containers styleing*/
-.jSParent .jSBarCorner
+.jSParent .jSBarCornerSelectable
 {
 	cursor: pointer;
 }
@@ -274,7 +280,6 @@
 {
 	font-size: 0.8em ! important;
 	text-align: center;
-	cursor: pointer ! important;
 	height: 18px;
 	border-width: 0px ! important;
 }
@@ -347,8 +352,12 @@
 	font-size: 0.8em ! important;
 	text-align: center;
 	vertical-align: middle ! important;
-	cursor: pointer ! important;
 	overflow: visible ! important;
+}
+
+.jSParent .jSBarLeftSelectable
+{
+	cursor: pointer ! important;
 }
 
 .jSInPlaceEdit

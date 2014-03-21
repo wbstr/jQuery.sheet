@@ -638,7 +638,8 @@ jQuery = jQuery || window.jQuery;
                             } else if (callbackIfFalse) {
                                 callbackIfFalse();
                             }
-                        }
+                        },
+                        barSelect: true
                     };
 
                 //destroy already existing spreadsheet
@@ -1560,11 +1561,14 @@ jQuery = jQuery || window.jQuery;
                         autoFillerHandle:'jSAutoFillerHandle',
                         autoFillerCover:'jSAutoFillerCover',
                         barCorner:'jSBarCorner',
+                        barCornerSelectable: 'jsBarCornerSelectable',
                         barController:'jSBarController',
                         barHelper:'jSBarHelper',
                         barLeft:'jSBarLeft',
+                        barLeftSelectable: 'jSBarLeftSelectable',
                         barHandleFreezeLeft:'jSBarHandleFreezeLeft',
                         barTop:'jSBarTop',
+                        barTopSelectable: 'jSBarTopSelectable',
                         barTopMenuButton: 'jSBarTopMenuButton',
                         barHandleFreezeTop:'jSBarHandleFreezeTop',
                         barTopParent:'jSBarTopParent',
@@ -2023,6 +2027,9 @@ jQuery = jQuery || window.jQuery;
                                                 var td = doc.createElement('td');
                                                 if (i == 0) {
                                                     td.setAttribute('class', jS.cl.barLeft + ' ' + jS.cl.uiBar);
+                                                    if(jS.isBarSelect()) {
+                                                        td.className += ' ' + jS.cl.barLeftSelectable;
+                                                    }
                                                     td.entity = 'left';
                                                     td.type = 'bar';
                                                 }
@@ -2120,6 +2127,9 @@ jQuery = jQuery || window.jQuery;
                                                         jS.controls.bar.x.td[jS.i].splice(col, 0, $td);
                                                         td.innerText = jSE.columnLabelString(col);
                                                         td.className = jS.cl.barTop + ' ' + jS.cl.uiBar;
+                                                        if(jS.isBarSelect()){
+                                                            td.className += ' ' + jS.cl.barTopSelectable;
+                                                        }
                                                         td.type = 'bar';
                                                         td.entity = 'top';
 
@@ -3238,7 +3248,9 @@ jQuery = jQuery || window.jQuery;
                                             paneContextmenuEvent.call(this, e);
                                         }
                                         mouseDownEntity = e.target.entity;
-                                        jS.evt.barInteraction.select(e.target);
+                                        if(jS.isBarSelect()){
+                                            jS.evt.barInteraction.select(e.target);
+                                        }
                                         return false;
                                     }
 
@@ -4737,6 +4749,9 @@ jQuery = jQuery || window.jQuery;
                                         td.entity = 'left';
                                         td.innerHTML = row;
                                         td.className = jS.cl.barLeft + ' ' + jS.cl.barLeft + '_' + jS.i + ' ' + jS.cl.uiBar;
+                                        if(jS.isBarSelect()) {
+                                            td.className += ' ' + jS.cl.barLeftSelectable;
+                                        }
                                         td.setAttribute('style', 'height:' + td.nextSibling.style.height); //This element is generated and needs to track the height of the item just before it
                                     }
 
@@ -4745,12 +4760,18 @@ jQuery = jQuery || window.jQuery;
                                         td.entity = 'top';
                                         td.innerHTML = jSE.columnLabelString(col);
                                         td.className = jS.cl.barTop + ' ' + jS.cl.barTop + '_' + jS.i + ' ' + jS.cl.uiBar;
+                                        if(jS.isBarSelect()){
+                                            td.className += ' ' + jS.cl.barTopSelectable;
+                                        }
                                     }
 
                                     if (row == 0 && col == 0) { //corner
                                         td.type = 'bar';
                                         td.entity = 'corner';
                                         td.className = jS.cl.uiBar + ' ' + ' ' + jS.cl.barCorner;
+                                        if(jS.isBarSelect()){
+                                            td.className += ' ' + jS.cl.barCornerSelectable;
+                                        }
                                         jS.controls.bar.corner[jS.i] = td;
                                     }
                                 }
@@ -8388,7 +8409,11 @@ jQuery = jQuery || window.jQuery;
                     /**
                      * @memberOf jS
                      */
-                    formulaParser: null
+                    formulaParser: null,
+
+                    isBarSelect: function() {
+                        return s.barSelect;
+                    }
                 };
             jS.setBusy(true);
             s.parent[0].jS = jS;
