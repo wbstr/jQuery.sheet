@@ -3897,7 +3897,9 @@ jQuery = jQuery || window.jQuery;
                                         case key.UP:
                                         case key.RIGHT:
                                         case key.DOWN:
-                                            (e.shiftKey ? jS.evt.cellSetHighlightFromKeyCode(e) : jS.evt.cellSetActiveFromKeyCode(e));
+                                            if(!jS.isBusy()){
+                                                (e.shiftKey ? jS.evt.cellSetHighlightFromKeyCode(e) : jS.evt.cellSetActiveFromKeyCode(e));
+                                            }
                                             break;
                                         case key.PAGE_UP:
                                             jS.evt.doc.pageUpDown(true);
