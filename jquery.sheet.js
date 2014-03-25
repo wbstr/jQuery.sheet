@@ -1598,6 +1598,7 @@ jQuery = jQuery || window.jQuery;
                         tdMenu:'jSTdMenu',
                         title:'jSTitle',
                         enclosure:'jSEnclosure',
+                        column: 'jSColumn_',
                         ui:'jSUI',
                         uiAutoFiller:'ui-state-active',
                         uiBar:'ui-widget-header',
@@ -2947,13 +2948,20 @@ jQuery = jQuery || window.jQuery;
                                 if (indexes.length != this.i || style) {
                                     this.i = indexes.length || this.i;
 
-                                    style = style || self.nthCss('col', '#' + jS.id + jS.i, indexes, jS.frozenAt().col + 1) +
-                                        self.nthCss('td', '#' + jS.id + jS.i + ' ' + 'tr', indexes, jS.frozenAt().col + 1);
-
+                                    if (!style) {
+                                        style = '';
+                                        var index = indexes.length;
+                                        do {
+                                            if (indexes[index] > jS.frozenAt().col)
+                                            {
+                                                style += ',.' + jS.cl.column + (indexes[index]);
+                                            }
+                                        } while (index-- > 1);
+                                        style = style.substring(1);
+                                        style += '{display: none}';
+                                    }
                                     this.css(style);
-
                                     jS.scrolledTo();
-
                                     if (indexes.length) {
                                         jS.scrolledArea[jS.i].start.col = math.max(indexes.pop() || 1, 1);
                                         jS.scrolledArea[jS.i].end.col = math.max(indexes.shift() || 1, 1);
@@ -2961,6 +2969,9 @@ jQuery = jQuery || window.jQuery;
 
                                     jS.obj.barHelper().remove();
                                 }
+
+
+
                             };
 
                             scrollStyleY.updateStyle = function (indexes, style) {
@@ -3742,6 +3753,7 @@ jQuery = jQuery || window.jQuery;
                              * @returns {*}
                              * @memberOf jS.evt.doc
                              */
+
                             enter:function (e) {
                                 if (!jS.cellLast.isEdit && !e.ctrlKey) {
                                     jS.obj.tdActive().dblclick();
@@ -3900,6 +3912,7 @@ jQuery = jQuery || window.jQuery;
                                             if(!jS.isBusy()){
                                                 (e.shiftKey ? jS.evt.cellSetHighlightFromKeyCode(e) : jS.evt.cellSetActiveFromKeyCode(e));
                                             }
+
                                             break;
                                         case key.PAGE_UP:
                                             jS.evt.doc.pageUpDown(true);
@@ -4793,7 +4806,7 @@ jQuery = jQuery || window.jQuery;
                                         td.type = 'bar';
                                         td.entity = 'top';
                                         td.innerHTML = jSE.columnLabelString(col);
-                                        td.className = jS.cl.barTop + ' ' + jS.cl.barTop + '_' + jS.i + ' ' + jS.cl.uiBar;
+                                        td.className = jS.cl.barTop + ' ' + jS.cl.barTop + '_' + jS.i + ' ' + jS.cl.uiBar + ' '+jS.cl.column+col;
                                         if(jS.isBarSelect()){
                                             td.className += ' ' + jS.cl.barTopSelectable;
                                         }
@@ -5513,6 +5526,19 @@ jQuery = jQuery || window.jQuery;
                             for (i = 0, j = tBody.children.length; i < j; i++) {
                                 tBody.children[i].style.height = h + 'px';
                             }
+                        }
+
+                        var allTr = $('tr', tBody);
+                        for (var tr = 0; tr < allTr.length; tr++) {
+                            var allTd = $('td', allTr[tr]);
+                            for (var td = 0; td < allTd.length; td++) {
+                                $(allTd[td]).addClass(jS.cl.column + (td + 1));
+                            }
+                        }
+
+                        var allCol = $('col', colGroup);
+                        for (var col = 0; col < allCol.length; col++) {
+                            $(allCol[col]).addClass(jS.cl.column + (col + 1));
                         }
 
                         table.tBody = tBody;
@@ -7376,11 +7402,14 @@ jQuery = jQuery || window.jQuery;
                         }
 
 
+
                         setTimeout(function () {
                             jS.setBusy(false);
                         }, 100);
                         jS.evt.scroll.stop();
+
                         jS.autoFillerGoToTd($td);
+
                     },
 
                     /**
