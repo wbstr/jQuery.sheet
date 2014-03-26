@@ -616,7 +616,7 @@ jQuery = jQuery || window.jQuery;
 
                                 if (!n(value)) {//success
                                     result = new Number(value);
-                                    result.html = globalize.format(value + '', "n10")
+                                    result.html = globalize.format(value, "n10")
                                         .replace(settings.endOfNumber, function (orig, radix, num) {
                                             return (num ? radix : '') + (num || '');
                                         });
