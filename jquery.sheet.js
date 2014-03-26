@@ -7400,16 +7400,12 @@ jQuery = jQuery || window.jQuery;
 
                             i++;
                         }
-
-
-
-                        setTimeout(function () {
-                            jS.setBusy(false);
-                        }, 100);
                         jS.evt.scroll.stop();
 
                         jS.autoFillerGoToTd($td);
-
+                        setTimeout(function () {
+                            jS.setBusy(false);
+                        }, 30);
                     },
 
                     /**
