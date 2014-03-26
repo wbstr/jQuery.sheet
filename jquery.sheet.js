@@ -9513,7 +9513,7 @@ jQuery = jQuery || window.jQuery;
          */
         COUNT:function () {
             var count = 0,
-                v = arrHelpers.toNumbers(arguments),
+                v = arrHelpers.flatten(arguments),
                 i = v.length - 1;
 
             if (i < 0) {
@@ -9521,7 +9521,7 @@ jQuery = jQuery || window.jQuery;
             }
 
             do {
-                if (v[i] !== null) {
+                if ($.isNumeric(v[i])) {
                     count++;
                 }
             } while (i--);
