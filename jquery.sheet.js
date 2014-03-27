@@ -616,7 +616,7 @@ jQuery = jQuery || window.jQuery;
 
                                 if (!n(value)) {//success
                                     result = new Number(value);
-                                    result.html = globalize.format(value, "n10")
+                                    result.html = globalize.format(value * 1, "n10")
                                         .replace(settings.endOfNumber, function (orig, radix, num) {
                                             return (num ? radix : '') + (num || '');
                                         });
@@ -11361,8 +11361,8 @@ jQuery = jQuery || window.jQuery;
 
     $.print = function (s) {
         var w = win.open();
-        w.document.write("<html><body><textarea>" + s + "\n</textarea></body></html>");
-        w.document.close();
+        w.doc.write("<html><body><textarea>" + s + "\n</textarea></body></html>");
+        w.doc.close();
     };
 
     //This is a fix for Jison
