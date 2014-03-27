@@ -625,6 +625,26 @@ jQuery = jQuery || window.jQuery;
 
                                 return value;
                             },
+                            numberN0: function(value) {
+                                if ($.isNumeric(value)) {//success
+                                    var result;
+                                    result = new Number(value);
+                                    result.html = globalize.format(value * 1, "n0");
+                                    return result;
+                                }
+
+                                return value;
+                            },
+                            numberN2: function(value) {
+                                if ($.isNumeric(value)) {//success
+                                    var result;
+                                    result = new Number(value);
+                                    result.html = globalize.format(value * 1, "n2");
+                                    return result;
+                                }
+
+                                return value;
+                            },
                             html: function(value) {
                                 return this.td.html()
                             }
