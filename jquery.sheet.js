@@ -612,42 +612,14 @@ jQuery = jQuery || window.jQuery;
                                 return value;
                             },
                             number: function(value) {
-                                var radix, result;
-                                if (!settings.endOfNumber) {
-                                    radix = globalize.culture().numberFormat['.'];
-                                    settings.endOfNumber = new RegExp("([" + (radix == '.' ? "\." : radix) + "])([0-9]*?[1-9]+)?(0)*$");
-                                }
-
-                                if ($.isNumeric(value)) {//success
-                                    result = new Number(value);
-                                    result.html = globalize.format(value * 1, "n10")
-                                        .replace(settings.endOfNumber, function (orig, radix, num) {
-                                            return (num ? radix : '') + (num || '');
-                                        });
-                                    return result;
-                                }
-
-                                return value;
+                                //TODO endOfNumber
+                                return handleNumber(value,10);
                             },
                             numberN0: function(value) {
-                                if ($.isNumeric(value)) {//success
-                                    var result;
-                                    result = new Number(value);
-                                    result.html = globalize.format(value * 1, "n0");
-                                    return result;
-                                }
-
-                                return value;
+                                return handleNumber(value,0);
                             },
                             numberN2: function(value) {
-                                if ($.isNumeric(value)) {//success
-                                    var result;
-                                    result = new Number(value);
-                                    result.html = globalize.format(value * 1, "n2");
-                                    return result;
-                                }
-
-                                return value;
+                                return handleNumber(value,2);
                             },
                             html: function(value) {
                                 return this.td.html()
@@ -672,6 +644,29 @@ jQuery = jQuery || window.jQuery;
                         useUneditableCells:true,
                         tdMenu:true
                     };
+
+
+                var handleNumber = function(value,dec){
+                    var radix = globalize.culture().numberFormat['.'];
+                    value = String(value);
+                    if (value.split(radix).length -1 > 0) {
+                        var parts = value.split(radix);
+                        value = parts.slice(0, -1).join('') + '.' + parts.slice(-1);
+                    }
+                    if (value.split('.').length -1 > 0) {
+                        var parts = value.split('.');
+                        value = parts.slice(0, -1).join('') + '.' + parts.slice(-1);
+                    }
+                    value = value.replace(/[^0-9.]/g,'');
+                    if ($.isNumeric(value)) {//success
+                        var result;
+                        result = new Number(value);
+                        result.html = globalize.format(value * 1, "n"+dec);
+                        return result;
+                    }
+
+                    return '';
+                }
 
                 //destroy already existing spreadsheet
                 var jS = this.jS;
