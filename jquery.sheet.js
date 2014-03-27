@@ -396,8 +396,12 @@ jQuery = jQuery || window.jQuery;
                 events = $.sheet.events;
 
             settings = settings || {};
-
             $(this).each(function () {
+                var culture = "en";
+                if(settings.culture){
+                    culture = settings.culture;
+                }
+                Globalize.culture(culture);
                 var globalize = Globalize,
                     me = $(this),
                     defaults = {
@@ -1237,7 +1241,6 @@ jQuery = jQuery || window.jQuery;
          * @returns {jS} jS jQuery sheet instance
          */
         createInstance:function (s, I) {
-
             var self = this,
                 //create function, it expects 2 values.
                 insertAfter = function (newElement, targetElement) {
