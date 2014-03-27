@@ -614,7 +614,7 @@ jQuery = jQuery || window.jQuery;
                                     settings.endOfNumber = new RegExp("([" + (radix == '.' ? "\." : radix) + "])([0-9]*?[1-9]+)?(0)*$");
                                 }
 
-                                if (!n(value)) {//success
+                                if ($.isNumeric(value)) {//success
                                     result = new Number(value);
                                     result.html = globalize.format(value * 1, "n10")
                                         .replace(settings.endOfNumber, function (orig, radix, num) {
