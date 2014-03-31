@@ -655,7 +655,10 @@ jQuery = jQuery || window.jQuery;
                     }
                     if (value.split('.').length -1 > 0) {
                         var parts = value.split('.');
-                        value = parts.slice(0, -1).join('') + '.' + parts.slice(-1);
+                        value = parts.slice(0, -1).join('');
+                        if(dec > 0){
+                            value+=  '.' + parts.slice(-1);
+                        }
                     }
                     value = value.replace(/[^0-9.]/g,'');
                     if ($.isNumeric(value)) {//success
