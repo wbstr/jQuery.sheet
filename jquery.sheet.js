@@ -643,6 +643,7 @@ jQuery = jQuery || window.jQuery;
                         addSpreadsheet:true,
                         useUneditableCells:true,
                         tdMenu:true
+                        sheetsSortable:true,
                     };
 
 
@@ -2905,7 +2906,7 @@ jQuery = jQuery || window.jQuery;
                             };
 
 
-                            if (jS.isSheetEditable() && $.fn.sortable) {
+                            if (jS.isSheetEditable() && jS.isSheetsSortable() && $.fn.sortable) {
                                     return jS.controls.tabContainer = $(tabContainer).sortable({
                                         placeholder:'ui-state-highlight',
                                         axis:'x',
