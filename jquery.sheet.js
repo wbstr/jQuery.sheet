@@ -8512,6 +8512,10 @@ jQuery = jQuery || window.jQuery;
 
                     isUseUneditableCells: function(){
                         return s.useUneditableCells;
+                    },
+
+                    isSheetsSortable: function(){
+                        return s.sheetsSortable;
                     }
                 };
             jS.setBusy(true);
