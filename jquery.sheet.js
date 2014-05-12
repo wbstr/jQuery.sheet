@@ -644,6 +644,8 @@ jQuery = jQuery || window.jQuery;
                         useUneditableCells:true,
                         tdMenu:true
                         sheetsSortable:true,
+                        barMenuTop:true,
+                        barMenuLeft:true,
                     };
 
 
@@ -8561,6 +8563,14 @@ jQuery = jQuery || window.jQuery;
 
             if (!$.support.boxModel) {
                 s.boxModelCorrection = 0;
+            }
+
+            if(!s.barMenuTop){
+                jS.controlFactory.barMenu.top = emptyFN;
+            }
+            
+            if(!s.barMenuLeft){
+                jS.controlFactory.barMenu.left = emptyFN;
             }
 
             if (!s.barMenus) {
