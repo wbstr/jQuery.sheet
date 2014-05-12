@@ -642,7 +642,7 @@ jQuery = jQuery || window.jQuery;
                         hideFormula:false,
                         addSpreadsheet:true,
                         useUneditableCells:true,
-                        tdMenu:true
+                        tdMenu:true,
                         sheetsSortable:true,
                         barMenuTop:true,
                         barMenuLeft:true,
